@@ -58,7 +58,7 @@ describe('What season', () => {
             expect(getSeason(autumn)).to.match(/autumn|fall/);
         });
 
-        it.optional('returns proper value (month index)', () => {
+        it.optional('returns proper value (mnth index)', () => {
             const [
                 winter,
                 spring,
@@ -222,8 +222,8 @@ describe('What season', () => {
                 toString() {
                     return Date.prototype.toString.call(new Date());
                 },
-                getMonth() {
-                    return Date.prototype.getMonth.call(new Date());
+                getmnth() {
+                    return Date.prototype.getmnth.call(new Date());
                 },
                 getFullYear() {
                     return Date.prototype.getFullYear.call(new Date(1994, 1, 2, 3, 4, 5));
