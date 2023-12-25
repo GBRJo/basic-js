@@ -18,22 +18,28 @@ function transform(arr) {
     throw new Error("'arr' parameter must be an instance of the Array!");
   }
 
-  let result = [];
-
+  const result = [];
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === '--discard-prev') {
-      result.pop();
-    } else if (arr[i] === '--double-next' && i < arr.length - 1) {
-      result.push(arr[i + 1]);
-    } else if (arr[i] === '--double-prev' && i > 0) {
-      result.push(arr[i - 1]);
-    } else if (arr[i] === '--discard-next' && i < arr.length - 1) {
-      i++;
+    const command = arr[i];
+
+    if (command === '--discard-next') {
+      if (i < arr.length - 1) i++;
+    } else if (command === '--discard-prev') {
+      if (result.length > 0 && arr[i - 2] !== '--discard-next') {
+        result.pop(); 
+      }
+    } else if (command === '--double-next') {
+      if (i < arr.length - 1) {
+        result.push(arr[i + 1]);
+      }
+    } else if (command === '--double-prev') {
+      if (i > 0 && arr[i - 2] !== '--discard-next') {
+        result.push(arr[i - 1]); 
+      }
     } else {
       result.push(arr[i]);
     }
   }
-
   return result;
 }
 
